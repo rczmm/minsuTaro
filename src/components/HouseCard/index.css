@@ -1,0 +1,21 @@
+@import "taro-ui-vue3/dist/style/components/rate.scss";
+
+.room-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.room-view {
+  width: 44%;
+  margin: 20px 20px;
+  border-radius: 20px;
+  background-color: chartreuse;
+  overflow: hidden;
+}
+
+.room-img{
+  object-fit: fill;
+  height: 250px;
+}
+

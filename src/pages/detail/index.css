@@ -1,0 +1,74 @@
+@import "taro-ui-vue3/dist/style/components/button.scss";
+
+.page-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(224, 218, 218);
+}
+
+.swiper-card {
+  /*height: 55%;*/
+  border-radius: 20px;
+  margin: 20px 20px;
+}
+
+.desc-card {
+  margin: 20px 20px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  width: 95%;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.house-card {
+  margin: 20px 20px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 95%;
+  height: 40%;
+}
+
+.house-card-img {
+  object-fit: cover;
+  padding: 20px;
+  width: 25%;
+  height: 200px;
+}
+
+/* 细节内容设置 */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  width: 70%; /* 根据图片宽度调整 */
+}
+
+/* tag列表的样式，使其子元素在同一行 */
+.tag-list {
+  display: flex;
+  gap: 5px; /* 标签之间的间距 */
+}
+
+.tag {
+  /* 标签的样式 */
+  background-color: lavender;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* 价格与按钮同一行 */
+.price-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 价格文本 */
+.price {
+  margin-right: auto; /* 将价格推到最左边 */
+}
