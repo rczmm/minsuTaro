@@ -22,7 +22,15 @@
     </swiper>
 
     <view class="desc-card">
-      <text>t 43y8g134y789gvuyfe78gvergv78reg8rv7eqg7f83erg78</text>
+      <text class="house-title">全海景高品质大床房（马赛）</text>
+      <view class="house-features">
+        <text class="feature-item">整套公寓</text>
+        <text class="feature-item">1室1厅</text>
+        <text class="feature-item">可住2人</text>
+      </view>
+      <view class="house-description">
+        <text>位于马赛市中心的海景公寓，步行可达老港口和主要景点。房间配备高品质大床和独立卫浴，配有厨房可以自己烹饪美食。阳台正对大海，可以欣赏无敌海景。</text>
+      </view>
     </view>
 
     <view class="house-card">

@@ -10,12 +10,77 @@
   width: 44%;
   margin: 20px 20px;
   border-radius: 20px;
-  background-color: chartreuse;
+  background-color: white;
   overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.room-view:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .room-img{
-  object-fit: fill;
+  width: 100%;
+  object-fit: cover;
   height: 250px;
+}
+
+.desc-view {
+  padding: 12px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.title-text {
+  font-family: 'DIN Next Pro', var(--font-family-heading);
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.price-text {
+  font-family: 'DIN Next Pro', var(--font-family-body);
+  font-size: 18px;
+  color: #ff4d4f;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(255, 77, 79, 0.1);
+}
+
+.original-price {
+  font-family: 'DIN Next Pro', var(--font-family-body);
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.discount-price {
+  font-family: 'DIN Next Pro', var(--font-family-body);
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d4f;
+  text-shadow: 0 1px 2px rgba(255, 77, 79, 0.1);
+}
+
+.spec-text {
+  font-size: 14px;
+  color: #999;
+}
+
+.rate-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #faad14;
 }
 

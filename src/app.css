@@ -1,0 +1,72 @@
+:root {
+  font-family: var(--font-family-body);
+  color: var(--neutral-color);
+  background-color: var(--white);
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* 按钮基础样式 */
+button {
+  background: var(--gradient-tech);
+  color: var(--white);
+  border: none;
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: var(--border-radius-m);
+  font-family: var(--font-family-heading);
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform var(--animation-fast) ease;
+}
+
+/* 卡片基础样式 */
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius-l);
+  box-shadow: var(--shadow-m);
+  padding: var(--spacing-m);
+  transition: transform var(--animation-normal) ease;
+}
+
+/* 动画效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--animation-normal) ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 滑动效果 */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform var(--animation-normal) ease;
+}
+
+.slide-enter-from {
+  transform: translateX(100%);
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
+/* 加载动画 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin var(--animation-normal) linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

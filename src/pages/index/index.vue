@@ -19,67 +19,55 @@
       <!-- 日期选择 -->
       <view class="date-picker">
 
-        <view @tap="showDate =  true">
+        <view @tap="showDate = true">
           {{ startDate }}- {{ night }}晚- {{ endDate }}
         </view>
 
-        <AtFloatLayout
-          :is-opened="showDate"
-          @close="showDate = false"
-        >
-          <at-calendar
-            :min-date="nowDate"
-            isMultiSelect
-            isVertical
-            :current-date="selectDate"
-            :onSelectDate="onSelectDate"
-          >
-          </at-calendar>
+        <AtFloatLayout :is-opened="showDate" @close="showDate = false" class="date-float-layout">
+          <view class="float-layout-content">
+            <at-calendar :min-date="nowDate" isMultiSelect isVertical :current-date="selectDate"
+              :onSelectDate="onSelectDate">
+            </at-calendar>
 
-          <at-button :disabled="disableButton" @click="sureDate">确定</at-button>
-
+            <at-button :disabled="disableButton" @click="sureDate" class="confirm-btn">确定</at-button>
+          </view>
         </AtFloatLayout>
 
-        <view @tap="showFloatLayout">
+        <view @tap="showFloatLayout" class="select-btn">
           {{ personNum }}/{{ bedNum }}
         </view>
 
-        <AtFloatLayout
-          is-opened
-          v-if="show"
-          @close="handleClose"
-        >
-          <view>
-            <text>宜居人数</text>
-            <at-tag
-              :active="item+'人' == personNum"
-              v-for="item in [1,2,3,4,5,6]"
-              @click="onClickTag(item,0)"
-            >
-              {{ item }}人
-            </at-tag>
-            <text>床铺数量</text>
-            <at-tag
-              :active="item+'床' == bedNum"
-              v-for="item in [1,2,3,4,5,6]"
-              @click="onClickTag(item,1)"
-            >
-              {{ item }}床
-            </at-tag>
+        <AtFloatLayout :is-opened="show" @close="handleClose" class="person-float-layout">
+          <view class="float-layout-content">
+            <view class="select-section">
+              <text class="select-title">宜居人数</text>
+              <view class="tag-group">
+                <at-tag :active="item + '人' == personNum" v-for="item in [1, 2, 3, 4, 5, 6]"
+                  @click="onClickTag(item, 0)" class="select-tag">
+                  {{ item }}人
+                </at-tag>
+              </view>
+            </view>
+
+            <view class="select-section">
+              <text class="select-title">床铺数量</text>
+              <view class="tag-group">
+                <at-tag :active="item + '床' == bedNum" v-for="item in [1, 2, 3, 4, 5, 6]" @click="onClickTag(item, 1)"
+                  class="select-tag">{{ item }}床
+                </at-tag>
+              </view>
+            </view>
           </view>
 
-          <at-button @click="removeSelect">清空</at-button>
-          <at-button @click="handleClose">确定</at-button>
-
+          <view class="button-group">
+            <at-button @click="removeSelect" class="clear-btn">清空</at-button>
+            <at-button @click="handleClose" class="confirm-btn">确定</at-button>
+          </view>
         </AtFloatLayout>
 
       </view>
 
-      <AtSearchBar
-        :value="value1"
-        @change="onChange.bind(this, 'value1')"
-        @action-click="onActionClick"
-      />
+      <AtSearchBar :value="value1" @change="onChange.bind(this, 'value1')" @action-click="onActionClick" />
 
 
       <!-- 搜索关键词 -->
@@ -100,59 +88,68 @@
         </at-flex>
       </view>
 
-      <!-- 搜索框 -->
-      <at-button class="search-btn" type="primary" plain>搜索民宿</at-button>
-
     </view>
 
     <AtGrid :data="[
-    {
-      image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-      value: '领取中心'
-    },
-    {
-      image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
-      value: '找折扣'
-    },
-    {
-      image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-      value: '领会员'
-    },
-    {
-      image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-      value: '新品首发'
-    },
-    {
-      image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
-      value: '领京豆'
-    }
-  ]" :column-num="5"
-    />
+          {
+            image: '/static/icons/lightning.png',
+            value: '热销',
+            iconInfo: {
+              value: 'lightning',
+              color: '#2C3E50',
+              size: 30
+            }
+          },
+          {
+            image: '/static/icons/fire.png',
+            value: '抢购',
+            iconInfo: {
+              value: 'fire',
+              color: '#2C3E50',
+              size: 30
+            }
+          },
+          {
+            image: '/static/icons/shield.png',
+            value: '新品',
+            iconInfo: {
+              value: 'shield',
+              color: '#2C3E50',
+              size: 30
+            }
+          },
+          {
+            image: '/static/icons/bag.png',
+            value: '优惠',
+            iconInfo: {
+              value: 'shopping-bag',
+              color: '#2C3E50',
+              size: 30
+            }
+          },
+          {
+            image: '/static/icons/basketball.png',
+            value: '活动',
+            iconInfo: {
+              value: 'basketball',
+              color: '#2C3E50',
+              size: 30
+            }
+          }
+        ]" :column-num="5" class="custom-grid" />
 
-    <swiper
-      class='test-h'
-      indicatorColor='#999'
-      indicatorActiveColor='#333'
-      current="current"
-      :duration="500"
-      :interval="5000"
-      :circular="false"
-      :autoplay="true"
-      :indicatorDots="true">
+    <swiper class='swiper-view' indicatorColor='#999' indicatorActiveColor='#333' current="current" :duration="500"
+      :interval="5000" :circular="false" :autoplay="true" :indicatorDots="true">
       <swiper-item v-for="(item, idx) in [
-        'https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180',
-        'https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180',
-        'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
-      ]" :key="idx">
-        <image :src="item" class="slide-image"/>
+          'https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180',
+          'https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180',
+          'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+        ]" :key="idx">
+        <image :src="item" class="slide-image" />
       </swiper-item>
     </swiper>
 
-    <at-tabs
-      :current="current"
-      scroll
-      :tabList="tabList"
-      @click="handleClick">
+    <at-tabs :current="current" scroll :tabList="tabList" @click="handleClick">
       <at-tabs-pane :current="current" :index="0">
         <HouseCard :data-list="houseList"></HouseCard>
       </at-tabs-pane>
@@ -167,19 +164,12 @@
       </at-tabs-pane>
     </at-tabs>
 
-    <at-divider></at-divider>
+    <at-divider>最新推荐</at-divider>
 
-    <at-flex
-      isAuto
-      isWrap
-      wrap="wrap"
-    >
+    <at-flex isAuto isWrap wrap="wrap">
       <at-flex-item v-for="item in items" :key="item.id">
         <view class="card-recommend">
-          <image
-            :src="item.image"
-            @tap="navToDetail(item.id)"
-            class="card-recommend-img"/>
+          <image :src="item.image" @tap="navToDetail(item.id)" class="card-recommend-img" />
           <view class="card-recommend-content">
             <view class="card-recommend-title">
               <text>【成都】远洋大古里</text>
@@ -198,7 +188,7 @@
 <script setup lang="ts">
 
 import './index.css';
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 import Taro from "@tarojs/taro";
 import HouseCard from "../../components/HouseCard/HouseCard.vue";
 
@@ -278,10 +268,10 @@ const handleClick = (value: number) => {
 };
 
 const tabList = ref([
-  {title: '标签页一'},
-  {title: '标签页二'},
-  {title: '标签页三'},
-  {title: '标签页四'}
+  { title: '标签页一' },
+  { title: '标签页二' },
+  { title: '标签页三' },
+  { title: '标签页四' }
 ]);
 
 const formatDate = (date: Date) => {
@@ -366,4 +356,3 @@ const removeSelect = () => {
 }
 
 </script>
-

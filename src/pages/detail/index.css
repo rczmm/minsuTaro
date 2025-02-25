@@ -3,72 +3,70 @@
 .page-container {
   width: 100%;
   height: 100%;
-  background-color: rgb(224, 218, 218);
+  background-color: var(--background-color);
 }
 
 .swiper-card {
-  /*height: 55%;*/
-  border-radius: 20px;
-  margin: 20px 20px;
-}
-
-.desc-card {
-  margin: 20px 20px;
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255);
-  width: 95%;
-  word-break: break-all;
-  white-space: normal;
+  border-radius: var(--border-radius-l);
+  margin: var(--spacing-m);
 }
 
 .house-card {
-  margin: 20px 20px;
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255);
+  margin: var(--spacing-m);
+  border-radius: var(--border-radius-l);
+  background-color: var(--white);
   display: flex;
   flex-direction: row;
   overflow: hidden;
   width: 95%;
   height: 40%;
+  box-shadow: var(--shadow-m);
+  transition: transform var(--animation-normal) ease;
+}
+
+.house-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-l);
 }
 
 .house-card-img {
   object-fit: cover;
-  padding: 20px;
+  padding: var(--spacing-m);
   width: 25%;
   height: 200px;
 }
 
-/* 细节内容设置 */
 .details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
-  width: 70%; /* 根据图片宽度调整 */
+  padding: var(--spacing-m);
+  width: 70%;
 }
 
-/* tag列表的样式，使其子元素在同一行 */
 .tag-list {
   display: flex;
-  gap: 5px; /* 标签之间的间距 */
+  gap: var(--spacing-xs);
 }
 
 .tag {
-  /* 标签的样式 */
-  background-color: lavender;
-  border-radius: 10px;
-  padding: 10px;
+  background-color: var(--highlight-yellow);
+  border-radius: var(--border-radius-m);
+  padding: var(--spacing-xs) var(--spacing-s);
+  font-size: var(--font-size-s);
+  color: var(--neutral-color);
 }
 
-/* 价格与按钮同一行 */
 .price-and-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: var(--spacing-m);
 }
 
-/* 价格文本 */
 .price {
-  margin-right: auto; /* 将价格推到最左边 */
+  margin-right: auto;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
 }
