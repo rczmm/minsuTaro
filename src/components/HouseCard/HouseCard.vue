@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import './index.css'
+import './index.css';
 
 defineProps({
   dataList: {

@@ -1,8 +1,8 @@
 <template>
-  <view class="page-container">
+  <view class="index-page-container">
     <!-- 标题栏 -->
     <view class="header">
-      <text class="title">小猪民宿</text>
+      <text class="title ">小猪民宿</text>
     </view>
 
     <view class="card">
@@ -10,7 +10,7 @@
       <!-- 当前位置 -->
       <view class="location">
         <picker mode="region" @change="onChange">
-          <view class="picker">
+          <view class="picker linear-gradient-title">
             所在城市:{{ selectorChecked }}
           </view>
         </picker>
@@ -69,74 +69,38 @@
 
       <AtSearchBar :value="value1" @change="onChange.bind(this, 'value1')" @action-click="onActionClick" />
 
-
       <!-- 搜索关键词 -->
-      <view class="tags">
-        <at-flex>
-          <at-flex-item>
-            <at-tag class="tag-item" type="primary" size="small">远洋大古里</at-tag>
-          </at-flex-item>
-          <at-flex-item>
-            <at-tag class="tag-item" type="primary" size="small">宽窄巷子</at-tag>
-          </at-flex-item>
-          <at-flex-item>
-            <at-tag class="tag-item" type="primary" size="small">天府广场</at-tag>
-          </at-flex-item>
-          <at-flex-item>
-            <at-tag class="tag-item" type="primary" size="small">成都东站</at-tag>
-          </at-flex-item>
-        </at-flex>
+      <view class="tag-list">
+        <at-tag class="tag-item" type="primary" size="small">远洋大古里</at-tag>
+        <at-tag class="tag-item" type="primary" size="small">宽窄巷子</at-tag>
+        <at-tag class="tag-item" type="primary" size="small">天府广场</at-tag>
+        <at-tag class="tag-item" type="primary" size="small">成都东站</at-tag>
       </view>
-
     </view>
 
-    <AtGrid :data="[
-          {
-            image: '/static/icons/lightning.png',
-            value: '热销',
-            iconInfo: {
-              value: 'lightning',
-              color: '#2C3E50',
-              size: 30
-            }
-          },
-          {
-            image: '/static/icons/fire.png',
-            value: '抢购',
-            iconInfo: {
-              value: 'fire',
-              color: '#2C3E50',
-              size: 30
-            }
-          },
-          {
-            image: '/static/icons/shield.png',
-            value: '新品',
-            iconInfo: {
-              value: 'shield',
-              color: '#2C3E50',
-              size: 30
-            }
-          },
-          {
-            image: '/static/icons/bag.png',
-            value: '优惠',
-            iconInfo: {
-              value: 'shopping-bag',
-              color: '#2C3E50',
-              size: 30
-            }
-          },
-          {
-            image: '/static/icons/basketball.png',
-            value: '活动',
-            iconInfo: {
-              value: 'basketball',
-              color: '#2C3E50',
-              size: 30
-            }
-          }
-        ]" :column-num="5" class="custom-grid" />
+    <view class="index-grid-view">
+      <view class="grid-item">
+        <text class="grid-icon iconfont icon-fangzi" style="font-size: 20px; color: #1890ff;"></text>
+        <text class="grid-desc">酒店</text>
+      </view>
+      <view class="grid-item">
+        <text class="grid-icon iconfont icon-fangzi1" style="font-size: 20px; color: #1890ff;"></text>
+        <text class="grid-desc">酒店</text>
+      </view>
+      <view class="grid-item">
+        <text class="grid-icon iconfont icon-fangzi2" style="font-size: 20px; color: #1890ff;"></text>
+        <text class="grid-desc">酒店</text>
+      </view>
+      <view class="grid-item">
+        <text class="grid-icon iconfont icon-fangzi3" style="font-size: 20px; color: #1890ff;"></text>
+        <text class="grid-desc">酒店</text>
+      </view>
+      <view class="grid-item">
+        <text class="grid-icon iconfont icon-fangzi4" style="font-size: 20px; color: #1890ff;"></text>
+        <text class="grid-desc">酒店</text>
+      </view>
+    </view>
+
 
     <swiper class='swiper-view' indicatorColor='#999' indicatorActiveColor='#333' current="current" :duration="500"
       :interval="5000" :circular="false" :autoplay="true" :indicatorDots="true">
@@ -149,7 +113,7 @@
       </swiper-item>
     </swiper>
 
-    <at-tabs :current="current" scroll :tabList="tabList" @click="handleClick">
+    <at-tabs :current="current" scroll :tabList="tabList" @click="handleClick" class="index-tabs">
       <at-tabs-pane :current="current" :index="0">
         <HouseCard :data-list="houseList"></HouseCard>
       </at-tabs-pane>
@@ -164,10 +128,12 @@
       </at-tabs-pane>
     </at-tabs>
 
-    <at-divider>最新推荐</at-divider>
+    <at-divider class="index-divider">
+      <text>最新推荐</text>
+    </at-divider>
 
-    <at-flex isAuto isWrap wrap="wrap">
-      <at-flex-item v-for="item in items" :key="item.id">
+    <view class="index-famous-list">
+      <view v-for="item in items" :key="item.id" class="famous-item">
         <view class="card-recommend">
           <image :src="item.image" @tap="navToDetail(item.id)" class="card-recommend-img" />
           <view class="card-recommend-content">
@@ -175,11 +141,9 @@
               <text>【成都】远洋大古里</text>
             </view>
           </view>
-
-
         </view>
-      </at-flex-item>
-    </at-flex>
+      </view>
+    </view>
 
 
   </view>
@@ -191,6 +155,12 @@ import './index.css';
 import { computed, ref } from "vue";
 import Taro from "@tarojs/taro";
 import HouseCard from "../../components/HouseCard/HouseCard.vue";
+
+const value1 = ref('');
+
+const onActionClick = () => {
+  console.log('action clicked');
+};
 
 const houseList = ref([
   {
@@ -268,10 +238,10 @@ const handleClick = (value: number) => {
 };
 
 const tabList = ref([
-  { title: '标签页一' },
-  { title: '标签页二' },
-  { title: '标签页三' },
-  { title: '标签页四' }
+  { title: '高空城景' },
+  { title: '庭院露台' },
+  { title: '山水美宿' },
+  { title: '异域风情' }
 ]);
 
 const formatDate = (date: Date) => {

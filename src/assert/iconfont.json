@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5220053",
+      "name": "房子",
+      "font_class": "fangzi",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "5482475",
+      "name": "房子",
+      "font_class": "fangzi1",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "5482987",
+      "name": "房子",
+      "font_class": "fangzi2",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "5483904",
+      "name": "房子",
+      "font_class": "fangzi3",
+      "unicode": "e73b",
+      "unicode_decimal": 59195
+    },
+    {
+      "icon_id": "12582546",
+      "name": "房子",
+      "font_class": "fangzi4",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "12593291",
+      "name": "房子",
+      "font_class": "fangzi5",
+      "unicode": "e6f4",
+      "unicode_decimal": 59124
+    }
+  ]
+}

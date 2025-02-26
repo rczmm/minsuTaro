@@ -4,6 +4,7 @@ import {createUI} from "taro-ui-vue3";
 import 'taro-ui-vue3/dist/style/index.scss'
 
 import './app.css'
+import './assert/iconfont.css'
 
 
 const App = createApp({

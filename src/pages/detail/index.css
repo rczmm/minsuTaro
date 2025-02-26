@@ -1,72 +1,84 @@
 @import "taro-ui-vue3/dist/style/components/button.scss";
 
-.page-container {
+.detail-page-container {
   width: 100%;
-  height: 100%;
-  background-color: var(--background-color);
+  height: 100vh;
+  background-image: linear-gradient(-225deg, #B7F8DB 0%, #50A7C2 100%);
 }
 
 .swiper-card {
-  border-radius: var(--border-radius-l);
-  margin: var(--spacing-m);
+  border-radius: 16px;
+  margin: 20px 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.details-slide-image{
+  object-fit: fill;
+  width: 100%;
+  height: 400px;
+}
+
+.desc-card{
+  border-radius: 20px;
+  margin: 20px 20px;
+  padding: 20px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
 }
 
 .house-card {
-  margin: var(--spacing-m);
-  border-radius: var(--border-radius-l);
-  background-color: var(--white);
+  margin: 16px 20px;
+  border-radius: 20px;
+  background-color: white;
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  width: 95%;
-  height: 40%;
-  box-shadow: var(--shadow-m);
-  transition: transform var(--animation-normal) ease;
+  height: 200px;
+  box-shadow: inset;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .house-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-l);
+  box-shadow: inset;
 }
 
 .house-card-img {
-  object-fit: cover;
-  padding: var(--spacing-m);
-  width: 25%;
-  height: 200px;
+  object-fit: fill;
+  width: 100%;
 }
 
 .details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--spacing-m);
+  padding: 10px;
   width: 70%;
+  background-color: whitesmoke;
+}
+
+.details-title {
+  align-self: first baseline;
 }
 
 .tag-list {
   display: flex;
-  gap: var(--spacing-xs);
+  gap: 10px;
 }
 
 .tag {
-  background-color: var(--highlight-yellow);
-  border-radius: var(--border-radius-m);
-  padding: var(--spacing-xs) var(--spacing-s);
-  font-size: var(--font-size-s);
-  color: var(--neutral-color);
+  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);
+  border-radius: 10px;
+  padding: 4px 4px;
 }
 
 .price-and-button {
+  width: 700px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: var(--spacing-m);
 }
 
-.price {
-  margin-right: auto;
-  font-size: var(--font-size-l);
-  font-weight: var(--font-weight-bold);
-  color: var(--primary-color);
+.price{
+  color: red
 }
