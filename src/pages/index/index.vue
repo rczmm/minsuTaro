@@ -169,7 +169,7 @@ const onActionClick = () => {
 const houseList = ref([
   {
     id: 1,
-    image: 'https://i2.hdslb.com/bfs/archive/a899ef440c277f9f5fe8cee0ef9e4ef4f5c8fddb.jpg@336w_190h_1c_!web-video-rcmd-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/5b2776042addc6b14f73e507b874555bfac1fefc.jpg',
     name: 'wenxinxiaojia1',
     price: 399.0,
     personNum: 1,
@@ -177,7 +177,7 @@ const houseList = ref([
     rate: 4.9
   }, {
     id: 2,
-    image: 'https://i2.hdslb.com/bfs/archive/60ed6883fd909708bdb805421c4a06638d5dcba5.jpg@336w_190h_1c_!web-video-rcmd-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/20ae10e2927b1f14b6ce3b2e71fb626ac06cb477.jpg',
     name: 'wenxinxiaojia2',
     price: 399.0,
     personNum: 1,
@@ -185,7 +185,7 @@ const houseList = ref([
     rate: 4.9
   }, {
     id: 3,
-    image: 'https://i2.hdslb.com/bfs/archive/60ed6883fd909708bdb805421c4a06638d5dcba5.jpg@336w_190h_1c_!web-video-rcmd-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/fa1e0a8cc8d4df6fd4962ae3e151591386272d5f.jpg',
     name: 'wenxinxiaojia2',
     price: 399.0,
     personNum: 1,
@@ -193,7 +193,7 @@ const houseList = ref([
     rate: 4.9
   }, {
     id: 4,
-    image: 'https://i2.hdslb.com/bfs/archive/60ed6883fd909708bdb805421c4a06638d5dcba5.jpg@336w_190h_1c_!web-video-rcmd-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/620970d0cbf19fde8246ad19eaa8142867ff573c.jpg',
     name: 'wenxinxiaojia2',
     price: 399.0,
     personNum: 1,
@@ -205,22 +205,142 @@ const houseList = ref([
 const items = ref([
   {
     id: 1,
-    image: 'https://i0.hdslb.com/bfs/archive/23b854b245e72e64123e59ee616fbc251b8bd948.jpg@672w_378h_1c_!web-home-common-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/2ec1b1bb44c09adb46d309a458fa3bdf371183a4.jpg',
     title: '领取中心',
     price: 399.0
   }, {
     id: 2,
-    image: 'https://i0.hdslb.com/bfs/archive/23b854b245e72e64123e59ee616fbc251b8bd948.jpg@672w_378h_1c_!web-home-common-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/8bcb339ae9c70641dfb28ccc7003a85874f603eb.jpg',
     title: '领取中心',
     price: 399.0
   }, {
     id: 3,
-    image: 'https://i0.hdslb.com/bfs/archive/23b854b245e72e64123e59ee616fbc251b8bd948.jpg@672w_378h_1c_!web-home-common-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/95c4b5a5df40b7222b85feb06852dd5b81fd6455.jpg',
     title: '领取中心',
     price: 399.0
   }, {
     id: 4,
-    image: 'https://i0.hdslb.com/bfs/archive/23b854b245e72e64123e59ee616fbc251b8bd948.jpg@672w_378h_1c_!web-home-common-cover.avif',
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 5,
+    image: 'https://i0.hdslb.com/bfs/archive/2c271b7d158edf3de749455b71c36915c73b4720.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 6,
+    image: 'https://i0.hdslb.com/bfs/archive/1c5d7e4e9a99d61ce68015fb47bf0b9e44d04f57.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 7,
+    image: 'https://i2.hdslb.com/bfs/archive/79fb09903ec292df2d3de59408d1539d6b27d24e.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/8e92fe5360ac24228784e5921886710fa9e863aa.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/eb21daf78c282a8df67adb2b48833eff84532a45.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
+    title: '领取中心',
+    price: 399.0
+  }, {
+    id: 4,
+    image: 'https://i0.hdslb.com/bfs/archive/0c94f350447e486d7b7e77633dada50cbf7a24cc.jpg',
     title: '领取中心',
     price: 399.0
   }
