@@ -4,7 +4,9 @@ export default defineAppConfig({
     'pages/my/my',
     'pages/collect/collect',
     'pages/message/message',
-    'pages/detail/index'
+    'pages/detail/index',
+    'pages/search/index',
+    'pages/booking/index'
   ],
   window: {
     backgroundTextStyle: 'light',

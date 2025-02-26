@@ -1,6 +1,6 @@
 <template>
   <view class="room-list">
-    <view class="room-view" v-for="(data,index) in dataList" :key="index">
+    <view class="room-view" v-for="(data,index) in dataList" :key="index" @tap="navToDetail(data.id)">
       <image class="room-img" :src="data.image" alt="11"></image>
       <view class="desc-view">
         <view class="title-row">
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import './index.css';
+import Taro from '@tarojs/taro';
 
 defineProps({
   dataList: {
@@ -27,5 +28,11 @@ defineProps({
     default: () => []
   }
 })
+
+const navToDetail = (id: number) => {
+  Taro.navigateTo({
+    url: `/pages/detail/index?id=${id}`
+  })
+}
 
 </script>

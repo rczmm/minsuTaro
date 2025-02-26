@@ -159,6 +159,9 @@ import HouseCard from "../../components/HouseCard/HouseCard.vue";
 const value1 = ref('');
 
 const onActionClick = () => {
+  Taro.navigateTo({
+    url: '/pages/search/index'
+  });
   console.log('action clicked');
 };
 
