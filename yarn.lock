@@ -3168,7 +3168,7 @@ data-view-byte-offset@^1.0.1:
 
 dayjs@^1.8.29:
   version "1.11.13"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.13.tgz#92430b0139055c3ebb60150aa13e860a4b5a366c"
+  resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.13.tgz#92430b0139055c3ebb60150aa13e860a4b5a366c"
   integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
 
 debug@^3.2.7:
@@ -6653,7 +6653,7 @@ tar-stream@^1.5.2:
 
 taro-ui-vue3@^1.0.0-alpha.21:
   version "1.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/taro-ui-vue3/-/taro-ui-vue3-1.0.0-alpha.21.tgz#68037625ad0ea4a0e5d080bc82b131309e3ec254"
+  resolved "https://registry.npmmirror.com/taro-ui-vue3/-/taro-ui-vue3-1.0.0-alpha.21.tgz#68037625ad0ea4a0e5d080bc82b131309e3ec254"
   integrity sha512-3//e9gnd8VhG9913ifVZP1wwlE9i1iJwwaYkHhSFgD1RhZomHqN+nRBuzNmV+aYZzjpAYqLSpt0v7CHaIyQwdA==
   dependencies:
     dayjs "^1.8.29"
