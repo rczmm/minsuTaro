@@ -6,7 +6,8 @@ export default defineAppConfig({
     'pages/message/message',
     'pages/detail/index',
     'pages/search/index',
-    'pages/booking/index'
+    'pages/booking/index',
+    'pages/order/index'
   ],
   window: {
     backgroundTextStyle: 'light',

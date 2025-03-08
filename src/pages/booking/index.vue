@@ -2,7 +2,9 @@
   <view class="booking-page">
     <!-- 房源信息 -->
     <view class="house-info">
-      <image class="house-image" src="https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180" mode="aspectFill" />
+      <image class="house-image"
+             src="https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180"
+             mode="aspectFill"/>
       <view class="info-content">
         <text class="house-title">全海景高品质大床房（马赛）</text>
         <text class="house-type">整套公寓 · 1室1厅 · 可住2人</text>
@@ -11,7 +13,7 @@
 
     <!-- 入住信息 -->
     <view class="booking-info">
-      <view class="info-item" @tap="showDatePicker = true">
+      <view class="info-item" @tap="showDatePicker = true; isSelectingCheckIn = true">
         <view class="item-label">入住时间</view>
         <view class="item-value">
           <text>{{ checkInDate || '请选择入住时间' }}</text>
@@ -19,7 +21,7 @@
         </view>
       </view>
 
-      <view class="info-item" @tap="showDatePicker = true">
+      <view class="info-item" @tap="showDatePicker = true; isSelectingCheckIn = false">
         <view class="item-label">离店时间</view>
         <view class="item-value">
           <text>{{ checkOutDate || '请选择离店时间' }}</text>
@@ -60,8 +62,7 @@
     <!-- 日期选择器 -->
     <at-float-layout :isOpened="showDatePicker" @close="showDatePicker = false">
       <at-calendar
-        :isMultiSelect="true"
-        :currentDate="selectedDates"
+        :currentDate="selectedDate"
         @selectDate="onSelectDate"
       />
       <view class="picker-buttons">
@@ -90,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import {ref, computed} from 'vue';
 import Taro from '@tarojs/taro';
 
 // 获取路由参数
@@ -107,7 +108,11 @@ const showDatePicker = ref(false);
 const showGuestPicker = ref(false);
 const checkInDate = ref('');
 const checkOutDate = ref('');
-const selectedDates = ref(['']);
+// 设置当前日期为默认值
+const today = new Date();
+const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+const selectedDate = ref(formattedToday);
+const isSelectingCheckIn = ref(true); // 标记当前是否在选择入住日期
 const guestCount = ref(2);
 
 // 计算属性
@@ -123,18 +128,92 @@ const totalPrice = computed(() => {
 });
 
 // 方法
-const onSelectDate = (dates: string[]) => {
-  selectedDates.value = dates;
+const onSelectDate = (date: any) => {
+  console.log('选择的日期原始值:', date);
+  try {
+    let year: number, month: number, day: number;
+    let dateObj: Date;
+    
+    if (date instanceof Date) {
+      dateObj = date;
+    } else if (typeof date === 'object' && date.start) {
+      // 处理日期选择器返回的对象格式 {start: "YYYY-MM-DD", end: "YYYY-MM-DD"}
+      dateObj = new Date(date.start);
+    } else if (typeof date === 'string') {
+      // 尝试解析字符串日期
+      const dateParts = date.split('-');
+      if (dateParts.length === 3) {
+        [year, month, day] = dateParts.map(Number);
+        dateObj = new Date(year, month - 1, day);
+      } else {
+        // 尝试直接创建日期对象
+        dateObj = new Date(date);
+      }
+    } else if (date && typeof date === 'object' && 'value' in date) {
+      // 处理可能是{value: xxx}格式的对象
+      return onSelectDate(date.value);
+    } else {
+      throw new Error('Invalid date type');
+    }
+
+    // 验证日期对象是否有效
+    if (isNaN(dateObj.getTime())) {
+      throw new Error('Invalid date');
+    }
+
+    // 提取年月日
+    year = dateObj.getFullYear();
+    month = dateObj.getMonth() + 1;
+    day = dateObj.getDate();
+
+    console.log('转换后的日期对象:', dateObj);
+    selectedDate.value = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    console.log('格式化后的日期字符串:', selectedDate.value);
+  } catch (error) {
+    console.error('日期处理错误:', error);
+    Taro.showToast({
+      title: '日期格式错误',
+      icon: 'none',
+      duration: 2000
+    });
+  }
 };
 
 const confirmDateSelection = () => {
-  if (selectedDates.value.length === 2) {
-    checkInDate.value = selectedDates.value[0];
-    checkOutDate.value = selectedDates.value[1];
-    showDatePicker.value = false;
+  console.log('确认选择时的selectedDate值:', selectedDate.value);
+  if (selectedDate.value) {
+    if (isSelectingCheckIn.value) {
+      console.log('设置入住日期');
+      checkInDate.value = selectedDate.value;
+      isSelectingCheckIn.value = false;
+      // 提示用户选择离店日期
+      Taro.showToast({
+        title: '请选择离店日期',
+        icon: 'none'
+      });
+      // 不关闭日期选择器，继续选择离店日期
+    } else {
+      // 设置离店日期
+      const checkIn = new Date(checkInDate.value);
+      const checkOut = new Date(selectedDate.value);
+      console.log('入住日期:', checkIn);
+      console.log('离店日期:', checkOut);
+      // 确保离店日期晚于入住日期
+      if (checkOut <= checkIn) {
+        Taro.showToast({
+          title: '离店日期必须晚于入住日期',
+          icon: 'none'
+        });
+        return;
+      }
+
+      checkOutDate.value = selectedDate.value;
+      showDatePicker.value = false;
+      isSelectingCheckIn.value = true; // 重置为选择入住日期状态
+    }
   } else {
     Taro.showToast({
-      title: '请选择入住和离店日期',
+      title: isSelectingCheckIn.value ? '请选择入住日期' : '请选择离店日期',
       icon: 'none'
     });
   }
@@ -259,6 +338,7 @@ const handleSubmit = () => {
   font-size: 18px;
   font-weight: bold;
 }
+
 .submit-bar {
   position: fixed;
   bottom: 0;
