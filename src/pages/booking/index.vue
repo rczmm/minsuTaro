@@ -259,16 +259,14 @@ const handleSubmit = () => {
   font-size: 18px;
   font-weight: bold;
 }
-
 .submit-bar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   background-color: #fff;
   padding: 12px 16px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -276,6 +274,7 @@ const handleSubmit = () => {
 .price-display {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .price-display .label {
@@ -290,7 +289,7 @@ const handleSubmit = () => {
 }
 
 .submit-btn {
-  width: 120px;
+  align-self: flex-end;
 }
 
 .picker-buttons {

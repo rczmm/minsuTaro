@@ -1,4 +1,4 @@
-<template>
+ <template>
   <view class="index-page-container">
     <!-- 标题栏 -->
     <view class="header">
@@ -25,10 +25,9 @@
 
         <AtFloatLayout :is-opened="showDate" @close="showDate = false" class="date-float-layout">
           <view class="float-layout-content">
-            <at-calendar :min-date="nowDate" isMultiSelect isVertical :current-date="selectDate"
-              :onSelectDate="onSelectDate">
+            <at-calendar :min-date="nowDate" isMultiSelect isVertical :currentDate="selectDate"
+              @selectDate="onSelectDate">
             </at-calendar>
-
             <at-button :disabled="disableButton" @click="sureDate" class="confirm-btn">确定</at-button>
           </view>
         </AtFloatLayout>
@@ -100,7 +99,6 @@
         <text class="grid-desc">酒店</text>
       </view>
     </view>
-
 
     <swiper class='swiper-view' indicatorColor='#999' indicatorActiveColor='#333' current="current" :duration="500"
       :interval="5000" :circular="false" :autoplay="true" :indicatorDots="true">
@@ -273,43 +271,43 @@ const tabList = ref([
   { title: '异域风情' }
 ]);
 
-const formatDate = (date: Date) => {
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${month}月${day}日`;
+
+const formatDateStr = (date: string) => {
+  if (!date) return '';
+  const d = new Date(date);
+  return `${d.getMonth() + 1}月${d.getDate()}日`;
 };
 
-const formatDateStr = (dateStr: string) => {
-  const date = new Date(dateStr);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${month}月${day}日`;
-}
-
-// 当前日期
-const startDate = ref(formatDate(new Date()));
-// 当前日期加一天
-const endDate = ref(formatDate(new Date(new Date().getTime() + 24 * 60 * 60 * 1000)));
-
-
+const startDate = ref(formatDateStr(new Date().toISOString()));
+const endDate = ref(formatDateStr(new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()));
 const selectDate = ref({
-  start: new Date().toLocaleDateString(),
-  end: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toLocaleDateString(),
+  start: new Date().toISOString(),
+  end: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
 });
 
 const onSelectDate = (e: any) => {
-  selectDate.value = e.value;
-  console.log(e.value);
-  console.log(selectDate.value);
-
+  selectDate.value = {
+    start: e.value.start,
+    end: e.value.end
+  };
 };
 
 const sureDate = () => {
+  if (!selectDate.value.start || !selectDate.value.end) {
+    Taro.showToast({
+      title: '请选择入住和离店日期',
+      icon: 'none'
+    });
+    return;
+  }
   showDate.value = false;
   startDate.value = formatDateStr(selectDate.value.start);
   endDate.value = formatDateStr(selectDate.value.end);
-  night.value = Math.ceil((new Date(selectDate.value.end).getTime() - new Date(selectDate.value.start).getTime()) / (24 * 60 * 60 * 1000));
-}
+  night.value = Math.ceil(
+    (new Date(selectDate.value.end).getTime() - new Date(selectDate.value.start).getTime()) /
+    (24 * 60 * 60 * 1000)
+  );
+};
 
 const disableButton = computed(() => {
   return !selectDate.value.start || !selectDate.value.end;

@@ -21,7 +21,7 @@
   margin: auto 10px;
 }
 
-.header>.title {
+.header > .title {
   margin: 16px auto;
 }
 
@@ -51,7 +51,7 @@
 }
 
 
-.tag-list>.tag-item {
+.tag-list > .tag-item {
   background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
   box-shadow: 0 2px 8px rgba(93, 159, 255, 0.2);
   transition: all 0.3s ease;
@@ -61,18 +61,18 @@
   margin-top: 10px;
 }
 
-.tag-list>.tag-item:hover {
+.tag-list > .tag-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(93, 159, 255, 0.3);
   background-image: linear-gradient(-225deg, #6BBBFF 0%, #B8DCFF 48%, #5D9FFF 100%);
 }
 
-.tag-list>.tag-item:active {
+.tag-list > .tag-item:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(93, 159, 255, 0.2);
 }
 
-.index-page-container>.index-grid-view {
+.index-page-container > .index-grid-view {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 20px;
@@ -84,7 +84,7 @@
   transition: box-shadow 0.3s ease;
 }
 
-.index-page-container>.index-grid-view:hover {
+.index-page-container > .index-grid-view:hover {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -158,7 +158,7 @@
   background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
 }
 
-.index-divider>text {
+.index-divider > text {
   background-color: transparent;
 }
 
@@ -169,7 +169,7 @@
   justify-content: space-between;
 }
 
-.index-famous-list>.famous-item {
+.index-famous-list > .famous-item {
   width: 47%;
   border-radius: 16px;
   background-color: white;
@@ -177,12 +177,12 @@
   overflow: hidden;
 }
 
-.card-recommend>.card-recommend-img {
+.card-recommend > .card-recommend-img {
   object-fit: fill;
   width: 100%;
 }
 
-.card-recommend>.card-recommend-content {
+.card-recommend > .card-recommend-content {
   margin-bottom: 16px;
   font-weight: bold;
 }
