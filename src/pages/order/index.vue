@@ -1,8 +1,21 @@
 <template>
   <view class="order-page">
+    <!-- 订单状态筛选 -->
+    <view class="order-tabs">
+      <view 
+        v-for="(tab, index) in tabs" 
+        :key="index"
+        class="tab-item"
+        :class="{ active: activeTab === tab.value }"
+        @tap="activeTab = tab.value"
+      >
+        {{ tab.label }}
+      </view>
+    </view>
+
     <!-- 订单列表 -->
-    <view class="order-list" v-if="orderList.length > 0">
-      <view class="order-item" v-for="order in orderList" :key="order.id">
+    <view class="order-list" v-if="filteredOrders.length > 0">
+      <view class="order-item" v-for="order in filteredOrders" :key="order.id">
         <view class="house-info">
           <image class="house-image" :src="order.houseImage" mode="aspectFill" />
           <view class="info-content">
@@ -51,8 +64,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Taro from '@tarojs/taro';
+
+// 订单状态筛选选项
+const tabs = [
+  { label: '全部', value: 'all' },
+  { label: '待支付', value: 'pending' },
+  { label: '已确认', value: 'confirmed' },
+  { label: '已完成', value: 'completed' },
+  { label: '已取消', value: 'cancelled' }
+];
+
+// 获取路由参数中的状态
+const router = Taro.getCurrentInstance().router;
+const statusParam = router?.params?.status;
+
+// 当前选中的状态标签，如果URL中有状态参数则使用，否则默认为'all'
+const activeTab = ref(statusParam && ['pending', 'confirmed', 'completed', 'cancelled'].includes(statusParam) ? statusParam : 'all');
 
 // 订单列表数据
 const orderList = ref([
@@ -66,8 +95,49 @@ const orderList = ref([
     guestCount: 2,
     totalPrice: 1760,
     status: 'pending' // pending, confirmed, completed, cancelled
+  },
+  {
+    id: 2,
+    houseTitle: '豪华双床套房',
+    houseType: '酒店式公寓 · 2室1厅 · 可住4人',
+    houseImage: 'https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180',
+    checkInDate: '2024-03-20',
+    checkOutDate: '2024-03-22',
+    guestCount: 3,
+    totalPrice: 1098,
+    status: 'confirmed'
+  },
+  {
+    id: 3,
+    houseTitle: '市中心精品单间',
+    houseType: '独立房间 · 1室0厅 · 可住2人',
+    houseImage: 'https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180',
+    checkInDate: '2024-02-10',
+    checkOutDate: '2024-02-12',
+    guestCount: 1,
+    totalPrice: 596,
+    status: 'completed'
+  },
+  {
+    id: 4,
+    houseTitle: '海边度假别墅',
+    houseType: '整套别墅 · 3室2厅 · 可住6人',
+    houseImage: 'https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180',
+    checkInDate: '2024-01-05',
+    checkOutDate: '2024-01-10',
+    guestCount: 5,
+    totalPrice: 4980,
+    status: 'cancelled'
   }
 ]);
+
+// 根据选中的标签筛选订单
+const filteredOrders = computed(() => {
+  if (activeTab.value === 'all') {
+    return orderList.value;
+  }
+  return orderList.value.filter(order => order.status === activeTab.value);
+});
 
 // 获取状态文本
 const getStatusText = (status: string) => {
@@ -87,6 +157,18 @@ const handlePayment = (orderId: number) => {
     title: '正在跳转支付...',
     icon: 'loading'
   });
+  
+  // 模拟支付成功后更新订单状态
+  setTimeout(() => {
+    const orderIndex = orderList.value.findIndex(order => order.id === orderId);
+    if (orderIndex !== -1) {
+      orderList.value[orderIndex].status = 'confirmed';
+      Taro.showToast({
+        title: '支付成功',
+        icon: 'success'
+      });
+    }
+  }, 1500);
 };
 
 // 处理取消订单
@@ -96,11 +178,15 @@ const handleCancel = (orderId: number) => {
     content: '确定要取消该订单吗？',
     success: function (res) {
       if (res.confirm) {
-        // 这里添加取消订单的逻辑
-        Taro.showToast({
-          title: '订单已取消',
-          icon: 'success'
-        });
+        // 更新订单状态为已取消
+        const orderIndex = orderList.value.findIndex(order => order.id === orderId);
+        if (orderIndex !== -1) {
+          orderList.value[orderIndex].status = 'cancelled';
+          Taro.showToast({
+            title: '订单已取消',
+            icon: 'success'
+          });
+        }
       }
     }
   });
@@ -121,9 +207,36 @@ const navigateToHome = () => {
   padding: 16px;
 }
 
+/* 订单状态筛选标签样式 */
+.order-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tab-item {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #666;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tab-item.active {
+  color: #1890ff;
+  font-weight: bold;
+  background-color: #e6f7ff;
+}
+
 .order-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 

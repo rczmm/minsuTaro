@@ -1,4 +1,4 @@
- <template>
+<template>
   <view class="index-page-container">
     <!-- 标题栏 -->
     <view class="header">
@@ -78,25 +78,25 @@
     </view>
 
     <view class="index-grid-view">
-      <view class="grid-item">
+      <view class="grid-item" @tap="navigateToCategory('高空城景', '1')">
         <text class="grid-icon iconfont icon-fangzi" style="font-size: 20px; color: #1890ff;"></text>
-        <text class="grid-desc">酒店</text>
+        <text class="grid-desc">高空城景</text>
       </view>
-      <view class="grid-item">
+      <view class="grid-item" @tap="navigateToCategory('庭院露台', '2')">
         <text class="grid-icon iconfont icon-fangzi1" style="font-size: 20px; color: #1890ff;"></text>
-        <text class="grid-desc">酒店</text>
+        <text class="grid-desc">庭院露台</text>
       </view>
-      <view class="grid-item">
+      <view class="grid-item" @tap="navigateToCategory('山水美宿', '3')">
         <text class="grid-icon iconfont icon-fangzi2" style="font-size: 20px; color: #1890ff;"></text>
-        <text class="grid-desc">酒店</text>
+        <text class="grid-desc">山水美宿</text>
       </view>
-      <view class="grid-item">
+      <view class="grid-item" @tap="navigateToCategory('异域风情', '4')">
         <text class="grid-icon iconfont icon-fangzi3" style="font-size: 20px; color: #1890ff;"></text>
-        <text class="grid-desc">酒店</text>
+        <text class="grid-desc">异域风情</text>
       </view>
-      <view class="grid-item">
+      <view class="grid-item" @tap="navigateToCategory('精品民宿', '5')">
         <text class="grid-icon iconfont icon-fangzi4" style="font-size: 20px; color: #1890ff;"></text>
-        <text class="grid-desc">酒店</text>
+        <text class="grid-desc">精品民宿</text>
       </view>
     </view>
 
@@ -351,5 +351,12 @@ const removeSelect = () => {
   personNum.value = "人数";
   bedNum.value = "床数";
 }
+
+// 导航到分类列表页面
+const navigateToCategory = (title: string, categoryId: string) => {
+  Taro.navigateTo({
+    url: `/pages/house-list/index?title=${encodeURIComponent(title)}&categoryId=${categoryId}`
+  });
+};
 
 </script>

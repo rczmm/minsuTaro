@@ -38,7 +38,10 @@
         </view>
         <view class="price-and-button">
           <text class="price">￥880起</text>
-          <at-button type="primary" size="small" @click="handleBooking">立即预订</at-button>
+          <view class="button-group">
+            <at-button type="secondary" size="small" @click="handleContactLandlord">联系房东</at-button>
+            <at-button type="primary" size="small" @click="handleBooking">立即预订</at-button>
+          </view>
         </view>
       </view>
     </view>
@@ -118,7 +121,14 @@
         <text class="price">¥880</text>
         <text class="price-unit">起/晚</text>
       </view>
-      <at-button type="primary" @click="handleBooking">立即预订</at-button>
+      <view class="bottom-buttons">
+        <button class="collect-btn" :class="{ 'collected': isCollected }" @tap="toggleCollect">
+          <text class="collect-icon">{{ isCollected ? '♥' : '♡' }}</text>
+          <text>{{ isCollected ? '已收藏' : '收藏' }}</text>
+        </button>
+        <at-button type="secondary" @click="handleContactLandlord">联系房东</at-button>
+        <at-button type="primary" @click="handleBooking">立即预订</at-button>
+      </view>
     </view>
   </view>
 </template>
@@ -126,7 +136,63 @@
 <script setup lang="ts">
 import './index.css'
 import Taro from '@tarojs/taro';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+// 房源ID，实际应从路由参数获取
+const houseId = ref(1);
+
+// 收藏状态
+const isCollected = ref(false);
+
+// 生命周期钩子
+onMounted(() => {
+  checkCollectStatus();
+});
+
+// 检查收藏状态
+const checkCollectStatus = () => {
+  const storedCollects = Taro.getStorageSync('collectList');
+  if (storedCollects) {
+    const collectList = JSON.parse(storedCollects);
+    isCollected.value = collectList.some(item => item.id === houseId.value);
+  }
+};
+
+// 切换收藏状态
+const toggleCollect = () => {
+  // 获取当前收藏列表
+  let collectList = [];
+  const storedCollects = Taro.getStorageSync('collectList');
+  if (storedCollects) {
+    collectList = JSON.parse(storedCollects);
+  }
+
+  if (isCollected.value) {
+    // 取消收藏
+    collectList = collectList.filter(item => item.id !== houseId.value);
+    Taro.showToast({
+      title: '已取消收藏',
+      icon: 'success'
+    });
+  } else {
+    // 添加收藏
+    collectList.push({
+      id: houseId.value,
+      title: '全海景高品质大床房（马赛）',
+      type: '整套公寓 · 1室1厅 · 可住2人',
+      image: images.value[0],
+      price: 880
+    });
+    Taro.showToast({
+      title: '收藏成功',
+      icon: 'success'
+    });
+  }
+
+  // 更新存储和状态
+  Taro.setStorageSync('collectList', JSON.stringify(collectList));
+  isCollected.value = !isCollected.value;
+};
 
 const images = ref([
   'https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180',
@@ -212,6 +278,25 @@ const similarHouses = ref([
 const navigateToHouse = (id: number) => {
   Taro.navigateTo({
     url: `/pages/detail/index?id=${id}`
+  });
+};
+
+// 处理联系房东按钮点击
+const handleContactLandlord = () => {
+  // 检查用户是否登录
+  const isLoggedIn = Taro.getStorageSync('userInfo');
+
+  if (!isLoggedIn && false) {
+    Taro.showToast({
+      title: '请先登录',
+      icon: 'none'
+    });
+    return;
+  }
+
+  // 跳转到聊天页面，并传递房源信息
+  Taro.navigateTo({
+    url: '/pages/message/chat?houseId=1&houseTitle=' + encodeURIComponent('全海景高品质大床房（马赛）')
   });
 };
 

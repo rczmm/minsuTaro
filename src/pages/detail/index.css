@@ -77,8 +77,90 @@
   width: 700px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .price{
-  color: red
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-unit {
+  font-size: 12px;
+  color: #999;
+}
+
+.bottom-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* 收藏按钮样式 */
+.collect-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collect-btn.collected {
+  background: linear-gradient(135deg, #ffecec, #ffcdd2);
+}
+
+.collect-icon {
+  font-size: 20px;
+  color: #999;
+  margin-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.collected .collect-icon {
+  color: #ff4d4f;
+}
+
+.collect-btn text {
+  font-size: 12px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.collected text {
+  color: #ff4d4f;
+}
+
+.collect-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
